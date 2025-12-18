@@ -18,4 +18,4 @@ CUDA_VISIBLE_DEVICES=0 TRAINER=pzo MODEL=facebook/opt-1.3b TASK=SST2 MODE=prefix
 CUDA_VISIBLE_DEVICES=0 TRAINER=pzo MODEL=facebook/opt-1.3b TASK=SST2 MODE=lora LR=5e-5 EPS=1e-2 bash mezo.sh
 ```
 ## Tips
-Since we need the gradient of the last layer, the forward propagation process will be somewhat different from the usual forward propagation. If you are interested in this, you can check the implementation of forward propagation in $\textit{util.py}$. Some directory locations may cause errors. Please check whether the directory locations in your related hyperparameters and code correspond correctly.
+Since we need the gradient of the last layer, the forward propagation process will be somewhat different from the usual forward propagation. If you are interested in this, you can check the implementation of forward propagation in $\textit{util.py}$. Some directory locations may cause errors. Please check whether the directory locations in your related hyperparameters and code correspond correctly. Please change the return hidden_states=outputs.hidden_states to hidden_states=outputs[0] in the forward of OPTForCausalLM, modeling_opt.py.
